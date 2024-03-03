@@ -7,10 +7,21 @@ use Illuminate\Http\Request;
 
 class AuthorController extends Controller
 {
-    public function authorPage()
+
+    private const AUTHOR_VALIDATOR = [
+        'name' => 'required|max:30',
+    ];
+    public function author()
     {
-        $authors = Author::all();
-        return view('admin-author', ['authors' => $authors]);
+        return view('author-create');
+
+    }
+
+    public function createAuthor(Request $request, Author $author)
+    {
+        $validation = $request->validate(self::AUTHOR_VALIDATOR);
+        $author->create(['name' => $validation['name']]);
+        return redirect()->route('home');
     }
 
     public function makeAuthorPublished(Author $author)

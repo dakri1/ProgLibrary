@@ -31,11 +31,18 @@ Route::post('/publish/{book}', [\App\Http\Controllers\AdminController::class, 'm
 @Route::get('/admin/category', [\App\Http\Controllers\AdminController::class, 'notPublishedCategories'])
     ->name('notPublishedCategories')->middleware('role:admin');
 
+@Route::get('/admin/author', [\App\Http\Controllers\AdminController::class, 'notPublishedAuthors'])
+    ->name('notPublishedAuthors')->middleware('role:admin');
+
 @Route::post('/publish/category/{category}', [\App\Http\Controllers\AdminController::class, 'makeCategoryPublished'])
     ->name('category.publish')->middleware('role:admin');
 
+@Route::post('/publish/author/{author}', [\App\Http\Controllers\AdminController::class, 'makeAuthorPublished'])
+    ->name('author.publish')->middleware('role:admin');
+
 @Route::delete('/home/{book}', [\App\Http\Controllers\HomeController::class, 'destroy'])
     ->name('book.destroy')->middleware('role:admin', 'can:destroy,book');
+
 
 @Route::get('/limits', [\App\Http\Controllers\LimitController::class, 'limitPage'])
     ->name('limits')->middleware('role:admin');
@@ -54,9 +61,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
     ->name('book.update')->middleware('can:update,book');
 @Route::get('/create/category', [\App\Http\Controllers\CategoryController::class, 'category'])
     ->name('category')->middleware('auth');
+@Route::get('/create/author', [\App\Http\Controllers\AuthorController::class, 'author'])
+    ->name('author')->middleware('auth');
 @Route::post('create/category', [\App\Http\Controllers\CategoryController::class, 'createCategory'])
     ->name('category.create')->middleware('auth');
-
+@Route::post('create/author', [\App\Http\Controllers\AuthorController::class, 'createAuthor'])
+    ->name('author.create')->middleware('auth');
 
 
 

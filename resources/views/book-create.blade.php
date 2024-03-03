@@ -29,10 +29,19 @@
                 @enderror
             </div>
             <div class="form-group">
-                <label for="category">
+                <label for="category"> Категории
                     <select multiple class="form-control" name="categories[]" id="categories">
                         @foreach($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="author"> Авторы
+                    <select multiple class="form-control" name="authors[]" id="authors">
+                        @foreach($authors as $author)
+                            <option value="{{ $author->id }}">{{ $author->name }}</option>
                         @endforeach
                     </select>
                 </label>

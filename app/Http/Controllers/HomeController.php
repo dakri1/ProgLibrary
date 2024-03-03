@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Author;
 use App\Models\Book;
+use App\Models\BookAuthor;
 use App\Models\BookCategory;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -16,6 +18,7 @@ class HomeController extends Controller
         'title' => 'required|max:60',
         'content' => 'required',
         'categories' => 'required',
+        'authors' => 'required'
     ];
 
     /**
@@ -41,7 +44,8 @@ class HomeController extends Controller
     public function create()
     {
         $categories = Category::all();
-        return view('book-create', ['categories' => $categories]);
+        $authors = Author::all();
+        return view('book-create', ['categories' => $categories, 'authors' => $authors]);
     }
 
     public function store(Request $request)
@@ -56,12 +60,20 @@ class HomeController extends Controller
             return redirect()->route('home');
         }
         $categories = $validated['categories'];
+        $authors = $validated['authors'];
+        unset($validated['authors']);
         unset($validated['categories']);
         $book = Auth::user()->books()->create(['title' => $validated['title'], 'content' => $validated['content'],
             'image' => 'images/' . $imageName]);
         foreach ($categories as $category){
             BookCategory::firstOrCreate([
                 'category_id' => $category,
+                'book_id' => $book->id,
+            ]);
+        }
+        foreach ($authors as $author) {
+            BookAuthor::firstOrCreate([
+                'author_id' => $author,
                 'book_id' => $book->id,
             ]);
         }
@@ -88,6 +100,7 @@ class HomeController extends Controller
     public function destroy(Book $book)
     {
         $book->categories()->detach();
+        $book->authors()->detach();
         $book->delete();
         return redirect()->route('home');
     }

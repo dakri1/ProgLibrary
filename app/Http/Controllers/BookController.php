@@ -16,7 +16,9 @@ class BookController extends Controller
 
     public function detail(Book $book)
     {
-        return view('detail', ['book' => $book]);
+        $authors = $book->authors()->pluck('name');
+        $categories = $book->categories()->pluck('name');
+        return view('detail', ['book' => $book, 'authors' => $authors, 'categories' => $categories]);
     }
 
     public function booksWithCategory(Category $category)
