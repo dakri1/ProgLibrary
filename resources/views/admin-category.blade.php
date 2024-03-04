@@ -10,7 +10,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $category->name }}</h5>
-                            <form action="{{ route('category.publish', ['category' => $category->id]) }}" method="post">
+                            <form action="{{ route('category.destroy', ['category' => $category->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" class="btn btn-danger" value="Delete">

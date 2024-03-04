@@ -37,6 +37,11 @@ Route::post('/publish/{book}', [\App\Http\Controllers\AdminController::class, 'm
 @Route::post('/publish/category/{category}', [\App\Http\Controllers\AdminController::class, 'makeCategoryPublished'])
     ->name('category.publish')->middleware('role:admin');
 
+@Route::delete('/admin/category/{category}', [\App\Http\Controllers\CategoryController::class, 'destroyCategory'])
+    ->name('category.destroy')->middleware('role:admin');
+@Route::delete('/admin/author/{author}', [\App\Http\Controllers\AuthorController::class, 'destroyAuthor'])
+    ->name('author.destroy')->middleware('role:admin');
+
 @Route::post('/publish/author/{author}', [\App\Http\Controllers\AdminController::class, 'makeAuthorPublished'])
     ->name('author.publish')->middleware('role:admin');
 

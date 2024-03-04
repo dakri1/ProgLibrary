@@ -37,8 +37,9 @@
                     </select>
                 </label>
             </div>
+            <a href="{{ route('category') }}" class="btn btn-primary">Добавить категорию</a>
             <div class="form-group">
-                <label for="author"> Авторы
+                <label for="author" class="mt-2"> Авторы
                     <select multiple class="form-control" name="authors[]" id="authors">
                         @foreach($authors as $author)
                             <option value="{{ $author->id }}">{{ $author->name }}</option>
@@ -46,7 +47,8 @@
                     </select>
                 </label>
             </div>
-            <button type="submit" class="btn btn-primary">Создать</button>
+            <a href="{{ route('author') }}" class="btn btn-primary">Добавить автора</a>
+            <button type="submit" class="btn btn-success float-right w-25">Создать</button>
         </form>
     </div>
 @endsection

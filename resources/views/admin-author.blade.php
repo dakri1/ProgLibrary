@@ -10,13 +10,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="card-title">{{ $author->name }}</h5>
-                            <form action="{{ route('category.destroy', ['author' => $author->id]) }}" method="post">
+                            <form action="{{ route('author.destroy', ['author' => $author->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
                                 <input type="submit" class="btn btn-danger" value="Delete">
                             </form>
                             {{--                            <a href="{{ route('book.edit', ['book' => $book->id]) }}" class="btn btn-secondary">Изменить</a>--}}
-                            <a href="{{ route('author.publish', ['category' => $author->id]) }}"
+                            <a href="{{ route('author.publish', ['author' => $author->id]) }}"
                                class="btn btn-secondary">Опубликовать</a>
                         </div>
                     </div>
