@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('limits', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('book_limit')->default(10);
-            $table->unsignedInteger('category_limit')->default(10);
-            $table->timestamps();
+            $table->unsignedInteger('limit');
+
             $table->foreign('user_id')->references('id')->on('users');
+            $table->timestamps();
         });
     }
 

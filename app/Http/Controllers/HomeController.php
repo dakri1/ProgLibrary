@@ -7,6 +7,8 @@ use App\Models\Book;
 use App\Models\BookAuthor;
 use App\Models\BookCategory;
 use App\Models\Category;
+use App\Models\Limit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use function PHPUnit\Framework\returnValue;
@@ -50,6 +52,11 @@ class HomeController extends Controller
 
     public function store(Request $request)
     {
+        $user = User::find($request->user()->id);
+        $userLimit = Limit::where('user_id', $user->id)->first();
+        if ($userLimit->limit == $user->books()->count()){
+            // Add logic for limit
+        }
         $validated = $request->validate(self::BB_VALIDATOR);
         if ($request->hasFile('image')) {
             $image = $request->file('image');

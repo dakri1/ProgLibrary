@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'post_count'
     ];
 
     /**
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function books()
     {
         return $this->hasMany(Book::class);
+    }
+
+    public function userLimit()
+    {
+        return $this->hasOne(Limit::class);
     }
 }
